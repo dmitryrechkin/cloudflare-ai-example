@@ -8,7 +8,7 @@ export class AskQuestionController {
 	 * @param {AnswerFinderService} answerFinderService 
 	 */
 	public constructor(
-		private answerFinderService: AnswerFinderService = new AnswerFinderService()
+		private readonly answerFinderService: AnswerFinderService = new AnswerFinderService()
 	) {}
 
 	/**

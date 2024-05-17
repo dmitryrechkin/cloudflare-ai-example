@@ -5,7 +5,7 @@ export const renderer = jsxRenderer(({ children, title }) => {
     <html>
       <head>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css" />
-        <script type='module' src='/static/main.js'></script>
+        <script type='module' src='/static/app.js'></script>
         <title>{title}</title>
       </head>
       <body id="root">{children}</body>

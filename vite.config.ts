@@ -10,9 +10,9 @@ export default defineConfig(({ mode }) => {
     build: {
       outDir: 'dist',
       rollupOptions: isClient ? {
-        input: './src/frontend/main.tsx',
+        input: './src/frontend/app.tsx',
         output: {
-          entryFileNames: 'static/main.js',
+          entryFileNames: 'static/app.js',
         },
       } : {},
     },
