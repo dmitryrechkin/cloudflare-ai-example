@@ -8,7 +8,7 @@ export class AskQuestionController {
 	 * @param {AnswerFinderService} answerFinderService 
 	 */
 	public constructor(
-		private readonly answerFinderService: AnswerFinderService = new AnswerFinderService()
+		private readonly answerFinderService: AnswerFinderService
 	) {}
 
 	/**
@@ -21,7 +21,7 @@ export class AskQuestionController {
 		const data = await context.req.json();
 
 		return this.answerFinderService.findAnswer(data.question).then((answer) => {
-			return context.json({ answer });
+			return context.json(answer);
 		});
 	}
 }

@@ -14,7 +14,8 @@ export default defineConfig(({ mode }) => {
         output: {
           entryFileNames: 'static/app.js',
         },
-      } : {},
+      } : {
+      },
     },
     publicDir: 'dist', // tells to use the dist folder as the public folder for static files
     plugins: isClient ? [] : [
