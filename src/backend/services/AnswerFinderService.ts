@@ -5,10 +5,10 @@ export class AnswerFinderService {
 	/**
 	 * Constructor.
 	 * 
-	 * @param {AiChatInterface} aiChat 
+	 * @param {AiChatInterface} aiChatClient 
 	 */
 	public constructor(
-		private aiChat: AiChatClientInterface
+		private readonly aiChatClient: AiChatClientInterface
 	) {}
 
 	/**
@@ -20,7 +20,7 @@ export class AnswerFinderService {
 	public async findAnswer(question: string): Promise<AnswerResponse> {
 		console.log(`Generate answer for: ${question}`);
 
-		return this.aiChat.invoke([{role: 'user', content: question}]).then((response) => {
+		return this.aiChatClient.invoke([{role: 'user', content: question}]).then((response) => {
 			console.log(`Response: ${response}`);
 
 			return { answer: response.response, errors: response.errors};

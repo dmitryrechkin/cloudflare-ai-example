@@ -1,14 +1,14 @@
 import { Context, TypedResponse } from "hono";
-import { AnswerFinderService } from "../services/AnswerFinderService";
+import { AnswerFinderServiceFactory } from "../factories/AnswerFinderServiceFactory";
 
 export class AskQuestionController {
 	/**
 	 * Constructor.
 	 * 
-	 * @param {AnswerFinderService} answerFinderService 
+	 * @param {AnswerFinderServiceFactory} answerFinderServiceFactory
 	 */
 	public constructor(
-		private readonly answerFinderService: AnswerFinderService
+		private readonly answerFinderServiceFactory: AnswerFinderServiceFactory
 	) {}
 
 	/**
@@ -20,7 +20,7 @@ export class AskQuestionController {
 	public async execute(context: Context): Promise<TypedResponse> {
 		const data = await context.req.json();
 
-		return this.answerFinderService.findAnswer(data.question).then((answer) => {
+		return this.answerFinderServiceFactory.create(context.env).findAnswer(data.question).then((answer) => {
 			return context.json(answer);
 		});
 	}
