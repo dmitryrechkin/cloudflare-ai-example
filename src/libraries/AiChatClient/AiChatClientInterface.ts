@@ -1,4 +1,4 @@
-import { AiChatClientMessage, AiChatClientOptions, AiChatClientResponse } from "./Types";
+import { AiChatClientMessage, AiChatClientOptions, AiChatClientResponse } from './Types';
 
 export interface AiChatClientInterface {
 	/**

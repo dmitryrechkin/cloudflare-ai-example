@@ -1,4 +1,4 @@
-import {} from 'hono'
+import {} from 'hono';
 
 declare module 'hono' {
   // it allows us to specify a renderer with the extra properties like title

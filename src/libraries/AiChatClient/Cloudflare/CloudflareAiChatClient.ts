@@ -1,8 +1,9 @@
-import { AiChatClientInterface } from "../AiChatClientInterface";
-import { AiChatClientMessage, AiChatClientOptions, AiChatClientResponse } from "../Types";
+import { AiChatClientInterface } from '../AiChatClientInterface';
+import { AiChatClientMessage, AiChatClientOptions, AiChatClientResponse } from '../Types';
 import { Ai } from '@cloudflare/ai';
 
-export class CloudflareAiChatClient implements AiChatClientInterface {
+export class CloudflareAiChatClient implements AiChatClientInterface
+{
 	private ai: Ai;
 
 	/**
@@ -14,7 +15,8 @@ export class CloudflareAiChatClient implements AiChatClientInterface {
 	public constructor(
 		binding: any,
 		private options: Partial<AiChatClientOptions> = {}
-	) {
+	)
+	{
 		this.ai = new Ai(binding);
 		this.setOptions(options);
 	}
@@ -25,7 +27,8 @@ export class CloudflareAiChatClient implements AiChatClientInterface {
 	 * @param {Partial<AiChatOptions>} options
 	 * @returns {void}
 	 */
-	public setOptions(options: Partial<AiChatClientOptions>): void {
+	public setOptions(options: Partial<AiChatClientOptions>): void
+	{
 		// Set the default options
 		this.options = {
 			modelId: '@cf/meta/llama-2-7b-chat-int8',
@@ -44,18 +47,21 @@ export class CloudflareAiChatClient implements AiChatClientInterface {
 	 * @param {AiChatClientMessage[]} messages
 	 * @returns {Promise<AiChatClientResponse>}
 	 */
-	public async invoke(messages: AiChatClientMessage[]): Promise<AiChatClientResponse> {
+	public async invoke(messages: AiChatClientMessage[]): Promise<AiChatClientResponse>
+	{
 		let result: Promise<AiChatClientResponse>;
 
-		try {
+		try
+		{
 			const response = await this.ai.run(
 				this.options.modelId,
 				{
 					messages,
 					stream: false,
 					timeout: this.options.timeout,
+					// eslint-disable-next-line @typescript-eslint/naming-convention
 					max_tokens: this.options.maxTokens,
-					temperature: this.options.temperature,
+					temperature: this.options.temperature
 				}
 			);
 
@@ -64,7 +70,9 @@ export class CloudflareAiChatClient implements AiChatClientInterface {
 				success: true,
 				errors: []
 			});
-		} catch (error) {
+		}
+		catch (error)
+		{
 			console.error(error);
 
 			result = Promise.resolve({

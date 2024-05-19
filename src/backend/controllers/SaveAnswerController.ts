@@ -1,11 +1,12 @@
-import { Context, TypedResponse } from "hono";
-import { AnswerSaverService } from "../services/AnswerSaverService";
+import { Context, TypedResponse } from 'hono';
+import { AnswerSaverService } from '../services/AnswerSaverService';
 
-export class SaveAnswerController {
+export class SaveAnswerController
+{
 	/**
 	 * Constructor.
-	 * 
-	 * @param {AnswerSaverService} answerSaverService 
+	 *
+	 * @param {AnswerSaverService} answerSaverService
 	 */
 	public constructor(
 		private readonly answerSaverService: AnswerSaverService = new AnswerSaverService()
@@ -13,14 +14,16 @@ export class SaveAnswerController {
 
 	/**
 	 * Save an answer.
-	 * 
+	 *
 	 * @param {Context} context
 	 * @returns {Promise<TypedResponse>}
 	 */
-	public async execute(context: Context): Promise<TypedResponse> {
+	public async execute(context: Context): Promise<TypedResponse>
+	{
 		const data = await context.req.json();
 
-		return this.answerSaverService.saveAnswer(data.answer).then((id) => {
+		return this.answerSaverService.saveAnswer(data.answer).then((id) =>
+		{
 			return context.json({ id });
 		});
 	}

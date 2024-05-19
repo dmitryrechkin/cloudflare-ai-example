@@ -4,6 +4,7 @@ import { AnswerFinderServiceFactory } from '../factories/AnswerFinderServiceFact
 
 export const questionRoutes = (new Hono()).basePath('/questions');
 
-questionRoutes.post('/', async (context: Context) => {
-	return (new AskQuestionController(new AnswerFinderServiceFactory())).execute(context)
+questionRoutes.post('/', async (context: Context) =>
+{
+	return (new AskQuestionController(new AnswerFinderServiceFactory())).execute(context);
 });
