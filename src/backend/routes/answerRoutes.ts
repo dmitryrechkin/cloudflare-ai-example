@@ -5,5 +5,12 @@ import { AnswerImproverServiceFactory } from '../factories/AnswerImproverService
 
 export const answerRoutes = (new Hono()).basePath('/answers');
 
-answerRoutes.put('/improve', async (context: Context) => (new ImproveAnswerController(new AnswerImproverServiceFactory())).execute(context));
-answerRoutes.post('/', async (context: Context) => (new SaveAnswerController()).execute(context));
+answerRoutes.put('/improve', async (context: Context) =>
+{
+	return (new ImproveAnswerController(new AnswerImproverServiceFactory())).execute(context);
+});
+
+answerRoutes.post('/', async (context: Context) =>
+{
+	return (new SaveAnswerController()).execute(context);
+});
