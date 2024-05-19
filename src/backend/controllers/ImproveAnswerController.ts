@@ -1,15 +1,15 @@
 import { Context, TypedResponse } from 'hono';
-import { AnswerImproverService } from '../services/AnswerImproverService';
+import { AnswerImproverServiceFactory } from '../factories/AnswerImproverServiceFactory';
 
 export class ImproveAnswerController
 {
 	/**
 	 * Constructor.
 	 *
-	 * @param {AnswerImproverService} AnswerImproverService
+	 * @param {AnswerImproverServiceFactory} answerImproverServiceFactory
 	 */
 	public constructor(
-		private readonly answerImproverService: AnswerImproverService = new AnswerImproverService()
+		private readonly answerImproverServiceFactory: AnswerImproverServiceFactory
 	) {}
 
 	/**
@@ -22,7 +22,7 @@ export class ImproveAnswerController
 	{
 		const data = await context.req.json();
 
-		return this.answerImproverService.improveAnswer(data.answer).then((improvedAnswer) =>
+		return this.answerImproverServiceFactory.create(context.env).improveAnswer(data.answer).then((improvedAnswer) =>
 		{
 			return context.json({ answer: improvedAnswer });
 		});

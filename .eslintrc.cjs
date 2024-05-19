@@ -4,6 +4,9 @@ module.exports = {
 	  'eslint:recommended', // Uses the recommended rules from ESLint
 	  'plugin:@typescript-eslint/recommended', // Uses the recommended rules from the @typescript-eslint/eslint-plugin
 	],
+	plugins: [
+		'unused-imports'
+	],
 	parserOptions: {
 	  ecmaVersion: 2020, // Allows for the parsing of modern ECMAScript features
 	  sourceType: 'module', // Allows for the use of imports
@@ -52,6 +55,18 @@ module.exports = {
 				selector: 'memberLike',
 				format: ['camelCase'],
 				leadingUnderscore: 'forbid'
+			}
+		],
+
+		// unused-imports rules
+		'unused-imports/no-unused-imports-ts': 'error',
+		'unused-imports/no-unused-vars-ts': [
+			'warn',
+			{
+				vars: 'all',
+				varsIgnorePattern: '^_',
+				args: 'after-used',
+				argsIgnorePattern: '^_'
 			}
 		]
 	}
