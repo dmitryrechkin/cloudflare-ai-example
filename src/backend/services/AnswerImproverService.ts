@@ -39,11 +39,12 @@ export class AnswerImproverService
 				- The text is not a question and does not need an answer or instructions.
 				
 				Format:
-				Provide the improved text in a single, clear sentence.
+				Return the improved text only.
 				
 				Constraints:
 				- The meaning of the text must remain unchanged.
 				- No additional information should be added.
+				- Do not add: "The improved text is:" or similar.
 				
 				Example:
 				
