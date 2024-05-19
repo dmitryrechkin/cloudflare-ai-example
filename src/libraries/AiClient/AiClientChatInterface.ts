@@ -1,13 +1,13 @@
-import { AiChatClientMessage, AiChatClientOptions, AiChatClientResponse } from './Types';
+import { AiChatClientMessage, AiClientOptions, AiChatClientResponse } from './Types';
 
-export interface AiChatClientInterface {
+export interface AiClientChatInterface {
 	/**
 	 * Sets the options for the AI chat
 	 *
-	 * @param {Partial<AiChatClientOptions>} options
+	 * @param {Partial<AiClientOptions>} options
 	 * @returns {void}
 	 */
-	setOptions(options: Partial<AiChatClientOptions>): void;
+	setOptions(options: Partial<AiClientOptions>): void;
 
 	/**
 	 * Invokes the AI model with the given messages

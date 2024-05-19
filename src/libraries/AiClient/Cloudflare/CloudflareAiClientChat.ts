@@ -1,8 +1,8 @@
-import { AiChatClientInterface } from '../AiChatClientInterface';
-import { AiChatClientMessage, AiChatClientOptions, AiChatClientResponse } from '../Types';
+import { AiClientChatInterface } from '../AiClientChatInterface';
+import { AiChatClientMessage, AiClientOptions, AiChatClientResponse } from '../Types';
 import { Ai } from '@cloudflare/ai';
 
-export class CloudflareAiChatClient implements AiChatClientInterface
+export class CloudflareAiClientChat implements AiClientChatInterface
 {
 	private ai: Ai;
 
@@ -14,7 +14,7 @@ export class CloudflareAiChatClient implements AiChatClientInterface
 	 */
 	public constructor(
 		binding: any,
-		private options: Partial<AiChatClientOptions> = {}
+		private options: Partial<AiClientOptions> = {}
 	)
 	{
 		this.ai = new Ai(binding);
@@ -27,7 +27,7 @@ export class CloudflareAiChatClient implements AiChatClientInterface
 	 * @param {Partial<AiChatOptions>} options
 	 * @returns {void}
 	 */
-	public setOptions(options: Partial<AiChatClientOptions>): void
+	public setOptions(options: Partial<AiClientOptions>): void
 	{
 		// Set the default options
 		this.options = {

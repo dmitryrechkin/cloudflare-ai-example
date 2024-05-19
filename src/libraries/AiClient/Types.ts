@@ -1,4 +1,4 @@
-export interface AiChatClientOptions {
+export interface AiClientOptions {
 	apiKey?: string | undefined;
 	organization?: string | undefined;
 	project?: string | undefined;

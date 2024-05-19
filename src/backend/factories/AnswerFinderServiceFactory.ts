@@ -1,15 +1,15 @@
 import { AnswerFinderService } from '../services/AnswerFinderService';
-import { AiChatClientFactory } from './AiChatClientFactory';
+import { AiClientChatFactory } from './AiClientChatFactory';
 
 export class AnswerFinderServiceFactory
 {
 	/**
 	 * Constructor.
 	 *
-	 * @param {AiChatClientFactory} aiChatClientFactory
+	 * @param {AiClientChatFactory} aiChatClientFactory
 	 */
 	public constructor(
-		private readonly aiChatClientFactory: AiChatClientFactory = new AiChatClientFactory()
+		private readonly aiChatClientFactory: AiClientChatFactory = new AiClientChatFactory()
 	) {}
 
 	/**

@@ -1,4 +1,4 @@
-import { AiChatClientInterface } from '../../libraries/AiChatClient/AiChatClientInterface';
+import { AiClientChatInterface } from '../../libraries/AiClient/AiClientChatInterface';
 import { AnswerResponse } from '../../types/AnswerResponse';
 
 export class AnswerFinderService
@@ -9,7 +9,7 @@ export class AnswerFinderService
 	 * @param {AiChatInterface} aiChatClient
 	 */
 	public constructor(
-		private readonly aiChatClient: AiChatClientInterface
+		private readonly aiChatClient: AiClientChatInterface
 	) {}
 
 	/**

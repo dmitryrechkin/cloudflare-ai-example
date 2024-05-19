@@ -6,7 +6,8 @@ pages_build_output_dir = "./dist"
 #bucket="./dist"
 
 [vars]
-AI_MODEL_ID="@cf/meta/llama-3-8b-instruct"
+AI_CHAT_MODEL_ID="@cf/meta/llama-3-8b-instruct"
+AI_EMBEDDINGS_MODEL_ID="@cf/baai/bge-large-en-v1.5"
 
 [ai]
 binding="AI"
