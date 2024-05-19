@@ -1,4 +1,6 @@
-import { AiChatClientMessage, AiClientOptions, AiChatClientResponse } from './Types';
+import { AiClientChatMessage } from './AiClientChatMessage';
+import { AiClientChatResponse } from './AiClientChatResponse';
+import { AiClientOptions } from './AiClientOptions';
 
 export interface AiClientChatInterface {
 	/**
@@ -12,8 +14,8 @@ export interface AiClientChatInterface {
 	/**
 	 * Invokes the AI model with the given messages
 	 *
-	 * @param {AiChatClientMessage[]} messages
-	 * @returns {Promise<AiChatClientResponse>}
+	 * @param {AiClientChatMessage[]} messages
+	 * @returns {Promise<AiClientChatResponse>}
 	 */
-	invoke(messages: AiChatClientMessage[]): Promise<AiChatClientResponse>;
+	invoke(messages: AiClientChatMessage[]): Promise<AiClientChatResponse>;
 }

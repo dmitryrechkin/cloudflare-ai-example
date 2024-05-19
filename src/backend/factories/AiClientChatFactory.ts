@@ -1,5 +1,6 @@
 import { AiClientChatInterface } from '../../libraries/AiClient/AiClientChatInterface';
 import { CloudflareAiClientChat } from '../../libraries/AiClient/Cloudflare/CloudflareAiClientChat';
+import { Bindings } from '../types/Bindings';
 import { AiClientChatOptionsFactory } from './AiClientChatOptionsFactory';
 
 export class AiClientChatFactory
@@ -16,11 +17,11 @@ export class AiClientChatFactory
 	/**
 	 * Creates an AI chat client.
 	 *
-	 * @param {any} env
+	 * @param {Bindings} env
 	 * @returns {AiClientChatInterface}
 	 */
-	public create(env: any): AiClientChatInterface
+	public create(env: Bindings): AiClientChatInterface
 	{
-		return new CloudflareAiClientChat(env?.AI, this.aiChatClientOptionsFactory.create(env));
+		return new CloudflareAiClientChat(env.AI, this.aiChatClientOptionsFactory.create(env));
 	}
 }

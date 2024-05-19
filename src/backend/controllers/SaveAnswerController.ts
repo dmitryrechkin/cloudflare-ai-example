@@ -1,15 +1,15 @@
 import { Context, TypedResponse } from 'hono';
-import { AnswerSaverService } from '../services/AnswerSaverService';
+import { AnswerSaverServiceFactory } from '../factories/AnswerSaverServiceFactory';
 
 export class SaveAnswerController
 {
 	/**
 	 * Constructor.
 	 *
-	 * @param {AnswerSaverService} answerSaverService
+	 * @param {AnswerSaverServiceFactory} answerSaverService
 	 */
 	public constructor(
-		private readonly answerSaverService: AnswerSaverService = new AnswerSaverService()
+		private readonly answerSaverServiceFactory: AnswerSaverServiceFactory
 	) {}
 
 	/**
@@ -22,9 +22,9 @@ export class SaveAnswerController
 	{
 		const data = await context.req.json();
 
-		return this.answerSaverService.saveAnswer(data.answer).then((id) =>
+		return this.answerSaverServiceFactory.create(context.env).saveAnswer(data).then((questionAnswer) =>
 		{
-			return context.json({ id });
+			return context.json(questionAnswer);
 		});
 	}
 }

@@ -2,14 +2,9 @@ import { Hono } from 'hono';
 import { questionRoutes } from './routes/questionRoutes';
 import { answerRoutes } from './routes/answerRoutes';
 import { renderer } from './middlewares/renderer';
+import { Bindings } from './types/Bindings';
 //import { Context } from 'hono';
 //import { serveStatic } from "hono/cloudflare-pages";
-
-type Bindings = {
-	DB: D1Database;
-	AI: Ai;
-	VECTORIZE_INDEX: VectorizeIndex;
-};
 
 const app = new Hono<{ Bindings: Bindings }>();
 

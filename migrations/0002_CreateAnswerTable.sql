@@ -1,0 +1,8 @@
+-- Migration number: 0002 	 2024-05-19T02:40:59.679Z
+CREATE TABLE IF NOT EXISTS answer (
+ 	id INTEGER PRIMARY KEY,
+	question_id INTEGER NOT NULL,
+	answer TEXT NOT NULL,
+
+	FOREIGN KEY (question_id) REFERENCES question(id) ON DELETE CASCADE
+);

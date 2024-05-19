@@ -1,4 +1,5 @@
 import { AnswerImproverService } from '../services/AnswerImproverService';
+import { Bindings } from '../types/Bindings';
 import { AiClientChatFactory } from './AiClientChatFactory';
 
 export class AnswerImproverServiceFactory
@@ -13,12 +14,12 @@ export class AnswerImproverServiceFactory
 	) {}
 
 	/**
-	 * Creates an answer finder service.
+	 * Creates an answer improver service.
 	 *
-	 * @param {any} env
+	 * @param {Bindings} env
 	 * @returns {AnswerImproverService}
 	 */
-	public create(env: any): AnswerImproverService
+	public create(env: Bindings): AnswerImproverService
 	{
 		return new AnswerImproverService(this.aiChatClientFactory.create(env));
 	}

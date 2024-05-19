@@ -1,23 +1,22 @@
 import { AiClientChatInterface } from '../AiClientChatInterface';
-import { AiChatClientMessage, AiClientOptions, AiChatClientResponse } from '../Types';
-import { Ai } from '@cloudflare/ai';
+import { AiClientOptions } from '../AiClientOptions';
+import { AiClientChatMessage } from '../AiClientChatMessage';
+import { AiClientChatResponse } from '../AiClientChatResponse';
 
 export class CloudflareAiClientChat implements AiClientChatInterface
 {
-	private ai: Ai;
-
 	/**
 	 * Constructor.
 	 *
-	 * @param {any} binding
+	 * @param {Ai} ai
 	 * @param {Partial<AiChatOptions>} options
 	 */
 	public constructor(
-		binding: any,
+		private ai: Ai,
 		private options: Partial<AiClientOptions> = {}
 	)
 	{
-		this.ai = new Ai(binding);
+		this.ai = ai;
 		this.setOptions(options);
 	}
 
@@ -44,12 +43,12 @@ export class CloudflareAiClientChat implements AiClientChatInterface
 	/**
 	 * Invokes the AI model with the given messages
 	 *
-	 * @param {AiChatClientMessage[]} messages
-	 * @returns {Promise<AiChatClientResponse>}
+	 * @param {AiClientChatMessage[]} messages
+	 * @returns {Promise<AiClientChatResponse>}
 	 */
-	public async invoke(messages: AiChatClientMessage[]): Promise<AiChatClientResponse>
+	public async invoke(messages: AiClientChatMessage[]): Promise<AiClientChatResponse>
 	{
-		let result: Promise<AiChatClientResponse>;
+		let result: Promise<AiClientChatResponse>;
 
 		try
 		{
@@ -78,7 +77,7 @@ export class CloudflareAiClientChat implements AiClientChatInterface
 			result = Promise.resolve({
 				response: '',
 				success: false,
-				errors: [JSON.stringify(error)]
+				errors: [(error as Error)?.message ?? 'Unknown error']
 			});
 		}
 

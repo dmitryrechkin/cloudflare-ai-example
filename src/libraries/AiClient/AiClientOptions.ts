@@ -9,14 +9,3 @@ export interface AiClientOptions {
 	maxTokens: number;
 	temperature: number;
 }
-
-export interface AiChatClientMessage {
-	role: string;
-	content: string;
-}
-
-export interface AiChatClientResponse {
-	response: string;
-	success: boolean;
-	errors: string[];
-}
