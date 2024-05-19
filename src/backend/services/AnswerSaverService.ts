@@ -2,6 +2,7 @@ import { Errors } from '../../types/Errors';
 import { QuestionAnswer } from '../../types/QuestionAnswer';
 import { AnswerWriteRepository } from '../repositories/AnswerWriteRepository';
 import { QuestionWriteRepository } from '../repositories/QuestionWriteRepository';
+import { VectorizeWriterService } from './VectorizeWriterService';
 
 export class AnswerSaverService
 {
@@ -10,10 +11,12 @@ export class AnswerSaverService
 	 *
 	 * @param {QuestionWriteRepository} questionWriteRepository
 	 * @param {AnswerWriteRepository} answerWriteRepository
+	 * @param {VectorizeWriterService} vectorizeWriterService
 	 */
 	public constructor(
 		private readonly questionWriteRepository: QuestionWriteRepository,
-		private readonly answerWriteRepository: AnswerWriteRepository
+		private readonly answerWriteRepository: AnswerWriteRepository,
+		private readonly vectorizeWriterService: VectorizeWriterService
 	) {}
 
 	/**
@@ -32,8 +35,9 @@ export class AnswerSaverService
 		{
 			const questionId = questionAnswer.questionId ?? (await this.questionWriteRepository.add(questionAnswer.question));
 			const answerId = await this.answerWriteRepository.add(questionId, questionAnswer.answer);
+			const vectorIds = await this.vectorizeWriterService.vectorize(questionId, questionAnswer.question);
 
-			result = { ...questionAnswer, questionId, answerId };
+			result = { ...questionAnswer, questionId, answerId, vectorIds: vectorIds };
 		}
 		catch (error)
 		{

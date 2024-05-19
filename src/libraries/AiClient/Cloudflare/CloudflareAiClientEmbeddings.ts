@@ -1,9 +1,8 @@
-import { AiClientChatInterface } from '../AiClientChatInterface';
 import { AiClientOptions } from '../AiClientOptions';
-import { AiClientChatMessage } from '../AiClientChatMessage';
-import { AiClientChatResponse } from '../AiClientChatResponse';
+import { AiClientEmbeddingsInterface } from '../AiClientEmbeddingsInterface';
+import { AiClientEmbeddingsResponse } from '../AiClientEmbeddingsResponse';
 
-export class CloudflareAiClientChat implements AiClientChatInterface
+export class CloudflareAiClientEmbeddings implements AiClientEmbeddingsInterface
 {
 	/**
 	 * Constructor.
@@ -41,31 +40,28 @@ export class CloudflareAiClientChat implements AiClientChatInterface
 	}
 
 	/**
-	 * Invokes the AI model with the given messages
+	 * Invokes the AI model with the input to create embeddings.
 	 *
-	 * @param {AiClientChatMessage[]} messages
-	 * @returns {Promise<AiClientChatResponse>}
+	 * @param {string} input
+	 * @returns {Promise<AiClientEmbeddingsResponse>}
 	 */
-	public async invoke(messages: AiClientChatMessage[]): Promise<AiClientChatResponse>
+	public async create(input: string): Promise<AiClientEmbeddingsResponse>
 	{
-		let result: Promise<AiClientChatResponse>;
+		let result: Promise<AiClientEmbeddingsResponse>;
 
 		try
 		{
-			const response = await this.ai.run(
+			const response: AiTextEmbeddingsOutput = await this.ai.run(
 				this.options.modelId,
 				{
-					messages,
+					text: [ input ],
 					stream: false,
-					timeout: this.options.timeout,
-					// eslint-disable-next-line @typescript-eslint/naming-convention
-					max_tokens: this.options.maxTokens,
-					temperature: this.options.temperature
+					timeout: this.options.timeout
 				}
 			);
 
 			result = Promise.resolve({
-				response: (response as {response: string}).response,
+				data: response.data[0],
 				success: true,
 				errors: []
 			});
@@ -75,7 +71,7 @@ export class CloudflareAiClientChat implements AiClientChatInterface
 			console.error(error);
 
 			result = Promise.resolve({
-				response: '',
+				data: [],
 				success: false,
 				errors: [(error as Error)?.message ?? 'Unknown error']
 			});

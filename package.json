@@ -3,14 +3,15 @@
   "scripts": {
     "lint": "eslint . --ext .ts",
     "format": "eslint . --ext .ts --fix",
-    "dev": "npm-run-all --parallel watch:client watch:server serve",
-    "serve": "vite serve",
     "watch:client": "vite build --mode client --watch",
     "watch:server": "vite build --mode server --watch",
-    "migrate:database": "node scripts/migrate-database.js",
-    "build": "npm run migrate:database && vite build --mode client && vite build --mode server",
-    "preview": "wrangler pages dev dist",
-    "deploy": "npm run build && wrangler pages deploy dist"
+    "migrate:database:local": "node scripts/migrate-database.js --local",
+    "migrate:database:remote": "node scripts/migrate-database.js --remote",
+    "dev": "npm run migrate:database:local && npm-run-all --parallel watch:client watch:server serve",
+    "serve": "vite serve",
+    "build": "npm run migrate:database:local && vite build --mode client && vite build --mode server",
+    "preview": "npm run migrate:database:local && wrangler pages dev dist",
+    "deploy": "npm run migrate:database:remote && npm run build && wrangler pages deploy dist"
   },
   "dependencies": {
     "eventsource-parser": "^1.1.2",

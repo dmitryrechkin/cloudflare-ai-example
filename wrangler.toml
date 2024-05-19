@@ -1,5 +1,6 @@
 name = "cloudflare-ai-example"
 pages_build_output_dir = "./dist"
+compatibility_date = "2024-05-19"
 #main = "src/index.tsx"
 
 #[site]
@@ -7,7 +8,7 @@ pages_build_output_dir = "./dist"
 
 [vars]
 AI_CHAT_MODEL_ID="@cf/meta/llama-3-8b-instruct"
-AI_EMBEDDINGS_MODEL_ID="@cf/baai/bge-large-en-v1.5"
+AI_EMBEDDINGS_MODEL_ID="@cf/baai/bge-base-en-v1.5"
 
 [ai]
 binding="AI"
@@ -16,10 +17,12 @@ binding="AI"
 binding = "DB" # i.e. available in your Worker on env.DB
 database_name = "rag-example"
 database_id = "eb287ca4-3518-46f2-8065-7f0355cd5124"
+migrations_dir = "./migrations"
 
 [[vectorize]]
 binding = "VECTORIZE_INDEX" # available within your Worker on env.VECTORIZE_INDEX
 index_name = "rag-example"
+dimensions = 1024
 
 # [vars]
 # MY_VAR = "my-variable"
