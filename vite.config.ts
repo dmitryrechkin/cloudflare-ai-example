@@ -16,6 +16,7 @@ export default defineConfig(({ mode }) =>
 					entryFileNames: 'static/app.js'
 				}
 			} : {
+				external: ['base64-js']
 			}
 		},
 		publicDir: 'dist', // tells to use the dist folder as the public folder for static files
