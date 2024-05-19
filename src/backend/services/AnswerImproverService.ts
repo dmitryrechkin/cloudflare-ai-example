@@ -25,7 +25,7 @@ export class AnswerImproverService
 		const messages = [
 			{
 				role: 'system',
-				content: 'Improve the language of the answer. Make it friendly and easy to understand.'
+				content: 'You are a language improving service. Your goal is to improve the language of the provided text, to make it friendly and easy to understand. Never change the meaning of the provided text. Any provided text should be assumed to be correct. Never add more information.'
 			},
 			{
 				role: 'user',
