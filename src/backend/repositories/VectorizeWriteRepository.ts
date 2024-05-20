@@ -13,6 +13,7 @@ export class VectorizeWriteRepository
 	 * Add or update a vector that represents a question to the vectorize index.
 	 *
 	 * @param {string} question
+	 * @param {number[]} values
 	 * @returns {Promise<string[]>}
 	 */
 	public upsert(questionId: number, values: number[]): Promise<string[]>
