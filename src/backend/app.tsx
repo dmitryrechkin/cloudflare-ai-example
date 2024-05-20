@@ -3,15 +3,14 @@ import { questionRoutes } from './routes/questionRoutes';
 import { answerRoutes } from './routes/answerRoutes';
 import { renderer } from './middlewares/renderer';
 import { Bindings } from './types/Bindings';
-//import { Context } from 'hono';
-//import { serveStatic } from "hono/cloudflare-pages";
+import { App } from '../frontend/components/App';
 
 const app = new Hono<{ Bindings: Bindings }>();
 
 app.use(renderer);
 
 app.get('/', (c) => {
-	return c.render(<div></div>, { title: 'Example JSX Form with Hono for CloudFlare Page' });
+	return c.render(<App/>, { title: 'Knowledge bot with CloudFlare Pages' });
 });
 
 // @see https://github.com/cloudflare/cloudflare-docs/issues/14550

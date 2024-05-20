@@ -69,7 +69,7 @@ export const Form = () => {
 
 	return (
 		<div>
-			<h1>Example JSX Form with Hono for CloudFlare Page</h1>
+			<h1>Knowledge bot with CloudFlare Pages</h1>
 			<dialog id="alerts" style={{ display: alerts ? 'block' : 'none' }}>{alerts}</dialog>
 			<form onSubmit={(e) => e.preventDefault()}>
 				<input type="hidden" name="questionId" value={questionId} />
