@@ -1,10 +1,6 @@
 name = "cloudflare-ai-example"
 pages_build_output_dir = "./dist"
 compatibility_date = "2024-05-19"
-#main = "src/index.tsx"
-
-#[site]
-#bucket="./dist"
 
 [vars]
 AI_CHAT_MODEL_ID="@cf/mistral/mistral-7b-instruct-v0.1"
@@ -29,22 +25,3 @@ migrations_dir = "./migrations"
 [[vectorize]]
 binding = "VECTORIZE_INDEX" # available within your Worker on env.VECTORIZE_INDEX
 index_name = "rag-example"
-
-# [vars]
-# MY_VAR = "my-variable"
-
-# [[kv_namespaces]]
-# binding = "MY_KV_NAMESPACE"
-# id = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
-
-# [[r2_buckets]]
-# binding = "MY_BUCKET"
-# bucket_name = "my-bucket"
-
-# [[d1_databases]]
-# binding = "DB"
-# database_name = "my-database"
-# database_id = ""
-
-# [ai]
-# binding = "AI"
