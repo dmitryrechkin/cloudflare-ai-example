@@ -13,9 +13,9 @@ export class AiClientChatOptionsFactory
 	{
 		return {
 			modelId: env.AI_CHAT_MODEL_ID,
-			timeout: 600,
-			maxTokens: 1024,
-			temperature: 0.75
+			timeout: env.AI_OPTIONS_TIMEOUT,
+			maxTokens: parseInt(env.AI_OPTIONS_MAX_TOKENS.toString()),
+			temperature: parseFloat(env.AI_OPTIONS_TEMPERATURE.toString())
 		};
 	}
 }

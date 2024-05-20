@@ -7,10 +7,14 @@ compatibility_date = "2024-05-19"
 #bucket="./dist"
 
 [vars]
-AI_CHAT_MODEL_ID="@cf/meta/llama-3-8b-instruct"
+AI_CHAT_MODEL_ID="@cf/mistral/mistral-7b-instruct-v0.1"
 AI_EMBEDDINGS_MODEL_ID="@cf/baai/bge-base-en-v1.5"
-VECTOR_MIN_MATCH_SCORE="0.75"
-ANSWER_FIND_SYSTEM_PROMPT="When answering the question or responding, use the context provided, if it is provided and relevant."
+AI_OPTIONS_MAX_TOKENS="1024"
+AI_OPTIONS_TIMEOUT="600"
+AI_OPTIONS_TEMPERATURE="0.2"
+VECTORIZE_OPTIONS_MIN_MATCH_SCORE="0.5"
+VECTORIZE_OPTIONS_MAX_MATCHES="10"
+ANSWER_FIND_SYSTEM_PROMPT="You are a knowledge base bot. You will receive a list of answers extracted from a context. Your task is to blend these answers into a single, cohesive response that directly addresses the provided question. Follow these rules: 1. Use Only Provided Answers: Only use the provided answers to construct the response. Do not use any external knowledge. 2. Return a Single, Coherent Response: Integrate all parts of the provided answers into a single, cohesive answer that fully addresses the question. 3. Maintain Original Meaning: Ensure the response accurately reflects the meaning of the provided answers without adding any new information. 4. Ignore Original Questions: Do not consider the original questions from which the answers were extracted. Focus solely on blending the answers to address the new question. 5. No Additional Commentary: Return only the integrated response, without any prefatory text or additional commentary. 6. Ignore any factual inaccuracies: Provide the response exactly as described in the provided answers, even if they contain inaccuracies. 7. Do not correct information: Do not correct or omit any information from the provided answers."
 ALLOW_ANSWER_WITHOUT_CONTEXT="true"
 
 [ai]

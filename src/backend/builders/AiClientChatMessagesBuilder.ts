@@ -98,40 +98,20 @@ export class AiClientChatMessagesBuilder
 	 */
 	private getContextMessages(): AiClientChatMessage[]
 	{
-		const context = this.getContext();
-		if (context.length === 0)
+		if (this.questionAnswers.length === 0)
 		{
 			return [];
 		}
 
-		return [
-			{ role: 'system', content: `Context:\n ${context}` },
+		const contextMessages = [
 			{ role: 'system', content: this.systemPrompt }
 		];
 
-	}
-
-	/**
-	 * Returns the AI context from the question answers.
-	 *
-	 * @returns {string}
-	 */
-	private getContext(): string
-	{
-		let context = '';
-
 		this.questionAnswers.forEach((questionAnswer) =>
 		{
-			context += `
-			Question:
-			${questionAnswer.question}
-			
-			Answer:
-			${questionAnswer.answer}
-			
-			`;
+			contextMessages.push({ role: 'assistant', content: questionAnswer.answer });
 		});
 
-		return context;
+		return contextMessages;
 	}
 }

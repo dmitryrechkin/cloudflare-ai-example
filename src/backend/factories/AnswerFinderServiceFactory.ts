@@ -31,12 +31,16 @@ export class AnswerFinderServiceFactory
 			this.aiChatClientFactory.create(env),
 			new VectorizeReadService(
 				this.aiClientEmbeddingsFactory.create(env),
-				new VectorizeReadRepository(env.VECTORIZE_INDEX, env.VECTOR_MIN_MATCH_SCORE)
+				new VectorizeReadRepository(
+					env.VECTORIZE_INDEX,
+					env.VECTORIZE_OPTIONS_MIN_MATCH_SCORE,
+					env.VECTORIZE_OPTIONS_MAX_MATCHES
+				)
 			),
 			new AnswerReadRepository(env.DB),
 			new AiClientChatMessagesBuilder()
 				.withAllowWithoutContext(env.ALLOW_ANSWER_WITHOUT_CONTEXT)
-				.withSystemPrompt('When answering the question or responding, use the context provided, if it is provided and relevant.')
+				.withSystemPrompt(env.ANSWER_FIND_SYSTEM_PROMPT)
 		);
 	}
 }

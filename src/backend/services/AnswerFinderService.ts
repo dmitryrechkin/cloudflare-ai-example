@@ -37,7 +37,7 @@ export class AnswerFinderService
 
 		try
 		{
-			questionAnswers = await this.getQuestioAnswers(question);
+			questionAnswers = await this.getQuestionAnswers(question);
 			questionId = questionAnswers.length === 1 ? questionAnswers[0].questionId : undefined;
 			answerId = questionAnswers.length === 1 ? questionAnswers[0].answerId : undefined;
 
@@ -52,7 +52,8 @@ export class AnswerFinderService
 			question,
 			answer,
 			questionId,
-			answerId
+			answerId,
+			vectorIds: questionAnswers.map((qa) => qa.questionId?.toString() ?? '')
 		};
 	}
 
@@ -82,10 +83,12 @@ export class AnswerFinderService
 	 * @param {string} question
 	 * @returns {QuestionAnswer[]}
 	 */
-	private async getQuestioAnswers(question: string): Promise<QuestionAnswer[]>
+	private async getQuestionAnswers(question: string): Promise<QuestionAnswer[]>
 	{
 		const questionIds = await this.vectorizeReadService.query(question);
 		const questionAnswers = await this.answerReadRepository.getByQuestionIds(questionIds);
+
+		console.log('Question Answers: ', JSON.stringify(questionAnswers));
 
 		return questionAnswers;
 	}
@@ -103,6 +106,8 @@ export class AnswerFinderService
 			.withQuestionAnswers(questionAnswers)
 			.withQuestion(question)
 			.build();
+
+		console.log('AI Chat Messages: ', JSON.stringify(aiChatMessages));
 
 		return aiChatMessages;
 	}

@@ -22,10 +22,16 @@ export class AnswerReadRepository
 	{
 		console.log(`Get answers by question ids: ${questionIds}`);
 
+		if (questionIds.length === 0)
+		{
+			console.log('No question ids provided.');
+			return Promise.resolve([]);
+		}
+
 		let query = `
 			SELECT
-				answer.id AS answer_id,
-				answer.question_id AS question_id,
+				answer.id AS answerId,
+				answer.question_id AS questionId,
 				answer.answer AS answer,
 				question.question AS question
 			FROM
@@ -50,6 +56,6 @@ export class AnswerReadRepository
 
 		console.log('Results: ', JSON.stringify(result?.results ?? []));
 
-		return result.results;
+		return Promise.resolve(result.results);
 	}
 }
